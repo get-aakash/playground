@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+import {  Container } from 'react-bootstrap';
 import './App.css';
+import SearchForm from './components/SearchForm';
+import { useState } from 'react';
+import MyMovieList from './components/MyMovieList';
+
 
 function App() {
+ const [movieList, setMovieList] = useState([])
+ console.log(movieList)
+ const addMovie = (movie)=>{
+  setMovieList([...movieList, movie])
+    
+
+ }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper bg-dark pt-5">
+      
+      <Container>
+        <h3 className='text-center'>My Movie Collection</h3>
+        <hr />
+        <SearchForm addMovie={addMovie} />
+        <MyMovieList data={movieList} />
+      </Container>
+      
     </div>
   );
 }
