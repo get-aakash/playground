@@ -1,29 +1,32 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 
-const DisplayTable = () => {
+const DisplayTable = ({toDo}) => {
   return (
     <div className="table p-2 ">
         <Table striped bordered hover className='mt-5'>
+            
       <thead>
         <tr>
           <th>#</th>
           <th>ToDo</th>
+          <th>Date</th>
           <th>Action</th>
           
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Delete</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Delete</td>
-        </tr>
+        {toDo.map((item,i)=>(
+             <tr key={i}>
+             <td>{i + 1}</td>
+             <td>{item.todo}</td>
+             <td>{item.date}</td>
+             <td>Delete</td>
+           </tr>
+
+        ))}
+       
+        
         
       </tbody>
     </Table>
