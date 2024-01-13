@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Table } from 'react-bootstrap'
 
-const DisplayTable = ({toDo}) => {
+const DisplayTable = ({toDo, handleOnDelete}) => {
   return (
     <div className="table p-2 ">
         <Table striped bordered hover className='mt-5'>
@@ -19,9 +19,9 @@ const DisplayTable = ({toDo}) => {
         {toDo.map((item,i)=>(
              <tr key={i}>
              <td>{i + 1}</td>
-             <td>{item.todo}</td>
-             <td>{item.date}</td>
-             <td className='text-center'><Button  variant='danger' className='btn-sm' ><i className="fa-solid fa-trash"></i></Button></td>
+             <td>{item.todos.todo}</td>
+             <td>{item.todos.date}</td>
+             <td className='text-center'><Button onClick={()=>handleOnDelete(item.id)}  variant='danger' className='btn-sm' ><i className="fa-solid fa-trash"></i></Button></td>
            </tr>
 
         ))}

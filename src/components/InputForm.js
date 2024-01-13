@@ -3,7 +3,8 @@ import { Button, Col, Form, Row } from 'react-bootstrap'
 import "../App.css"
 import DisplayTable from './DisplayTable'
 
-const InputForm = () => {
+let globalId = 0
+const InputForm = ({handleOnDelete}) => {
     const [formData, setFormData] = useState({})
     const [toDo, setToDO] = useState([])
 
@@ -14,10 +15,11 @@ const InputForm = () => {
 
     const handleOnsubmit = (e)=>{
         e.preventDefault()
-        setToDO([...toDo, formData])
-        setFormData("")
+        setToDO([...toDo, {todos: formData, id: globalId++}])
+       
        
     }
+   
     
     return (
         <div className=" ">
@@ -37,7 +39,7 @@ const InputForm = () => {
             </Form>
             <span className="d-block p-1 bg-info "></span>
             <div className="display">
-            <DisplayTable toDo={toDo}  />
+            <DisplayTable toDo={toDo} handleOnDelete={handleOnDelete}  />
             </div>
         </div>
 
