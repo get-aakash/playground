@@ -24,10 +24,10 @@ const InputForm = () => {
             <Form onSubmit={handleOnsubmit} className='wrapper p-4 text-center d-flex align-items-center justify-content-center' >
                 <Row  >
                     <Col md={6} >
-                        <Form.Control name='todo' value={formData.todo} placeholder="Enter Your ToDo here ..." onChange={handleOnchange} />
+                        <Form.Control required name='todo' value={formData.todo} placeholder="Enter Your ToDo here ..." onChange={handleOnchange} />
                     </Col>
                     <Col md={4} >
-                        <Form.Control type='date' name='date' value={formData.date} placeholder="Date" onChange={handleOnchange} />
+                        <Form.Control required type='date' name='date' value={formData.date} placeholder="Date" onChange={handleOnchange} />
                     </Col>
                     <Col md={2}>
                         <Button type='submit' variant='success'>Create</Button>

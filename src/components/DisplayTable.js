@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table } from 'react-bootstrap'
+import { Button, Table } from 'react-bootstrap'
 
 const DisplayTable = ({toDo}) => {
   return (
@@ -21,7 +21,7 @@ const DisplayTable = ({toDo}) => {
              <td>{i + 1}</td>
              <td>{item.todo}</td>
              <td>{item.date}</td>
-             <td>Delete</td>
+             <td className='text-center'><Button  variant='danger' className='btn-sm' ><i className="fa-solid fa-trash"></i></Button></td>
            </tr>
 
         ))}
