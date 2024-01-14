@@ -3,24 +3,38 @@ import { Button, Col, Form, Row } from 'react-bootstrap'
 import "../App.css"
 import DisplayTable from './DisplayTable'
 
-let globalId = 0
-const InputForm = ({handleOnDelete}) => {
-    const [formData, setFormData] = useState({})
+let globalId = 1
+const initialState = {
+    todo: "",
+    date: "",
+
+
+}
+const InputForm = () => {
+    const [formData, setFormData] = useState(initialState)
     const [toDo, setToDO] = useState([])
-
-    const handleOnchange = (e)=>{
-        const {name, value} = e.target
-        setFormData({...formData, [name]:value})
+    const handleOnDelete = (id) => {
+        if (window.confirm("Are you sure to delete this TODO?")) {
+            const value = toDo.filter((data) => data.id !== id)
+            setToDO(value)
+        }
     }
 
-    const handleOnsubmit = (e)=>{
+    const handleOnchange = (e) => {
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
+
+
+    }
+    const handleOnsubmit = (e) => {
         e.preventDefault()
-        setToDO([...toDo, {todos: formData, id: globalId++}])
-       
-       
+        setToDO([...toDo, { todos: formData, id: globalId++ }])
+        setFormData(initialState)
+
     }
+
    
-    
+
     return (
         <div className=" ">
             <Form onSubmit={handleOnsubmit} className='wrapper p-4 text-center d-flex align-items-center justify-content-center' >
@@ -39,7 +53,7 @@ const InputForm = ({handleOnDelete}) => {
             </Form>
             <span className="d-block p-1 bg-info "></span>
             <div className="display">
-            <DisplayTable toDo={toDo} handleOnDelete={handleOnDelete}  />
+                <DisplayTable toDo={toDo} handleOnDelete={handleOnDelete} />
             </div>
         </div>
 

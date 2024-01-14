@@ -4,13 +4,13 @@ import InputForm from '../components/InputForm'
 
 
 const Dashboard = () => {
+  const handleOnDelete = (id)=>{
+    alert(id)
+  }
 
-    const handleOnDelete = (id)=>{
-        console.log(id)
-    }
   return (
     <DefaultLayout>
-        <InputForm handleOnDelete={handleOnDelete} />
+        <InputForm handleOnDelete={handleOnDelete}  />
         
     </DefaultLayout>
   )

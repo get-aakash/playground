@@ -21,7 +21,7 @@ const DisplayTable = ({toDo, handleOnDelete}) => {
              <td>{i + 1}</td>
              <td>{item.todos.todo}</td>
              <td>{item.todos.date}</td>
-             <td className='text-center'><Button onClick={()=>handleOnDelete(item.id)}  variant='danger' className='btn-sm' ><i className="fa-solid fa-trash"></i></Button></td>
+             <td className='text-center'><Button onClick={()=>handleOnDelete(item.id)}   variant='danger' className='btn-sm' ><i className="fa-solid fa-trash"></i></Button></td>
            </tr>
 
         ))}
