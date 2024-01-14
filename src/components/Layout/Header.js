@@ -1,6 +1,7 @@
 import React from 'react'
 import { Container, Nav, NavDropdown, Navbar } from 'react-bootstrap'
 import "../../App.css"
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
@@ -10,9 +11,9 @@ const Header = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-            <Nav.Link href="#home">SignIn</Nav.Link>
-            <Nav.Link href="#link">SignUp</Nav.Link>
-            <Nav.Link href="#link">SignOut</Nav.Link>
+            <Link to="/" className='nav-link'>SignIn</Link>
+            <Link to="/register" className='nav-link'>SignUp</Link>
+            <Link to="" className='nav-link'>SignOut</Link>
             
           </Nav>
         </Navbar.Collapse>

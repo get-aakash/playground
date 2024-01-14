@@ -3,6 +3,8 @@ import './App.css';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import Dashboard from './pages/Dashboard';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -16,7 +18,7 @@ function App() {
       <Route path='/dashboard' element={<Dashboard />} />
 
     </Routes>
-      
+    <ToastContainer />
     </div>
   );
 }
