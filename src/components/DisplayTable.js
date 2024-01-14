@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Table } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { create } from '../redux/toDoSlice'
 
-const DisplayTable = ({toDo, handleOnDelete}) => {
+const DisplayTable = () => {
+
+  const {todoInfo} = useSelector((state)=> state.toDo)
+  const dispatch = useDispatch()
+  
+  const handleOnDelete = (id) => {
+    if (window.confirm("Are you sure to delete this TODO?")) {
+        const value = todoInfo.filter((data) => data.id !== id)
+        dispatch(create(value))
+        
+    }
+}
+  
   return (
     <div className="table p-2 ">
         <Table striped bordered hover className='mt-5'>
@@ -16,7 +30,7 @@ const DisplayTable = ({toDo, handleOnDelete}) => {
         </tr>
       </thead>
       <tbody>
-        {toDo.map((item,i)=>(
+        {todoInfo.map((item,i)=>(
              <tr key={i}>
              <td>{i + 1}</td>
              <td>{item.todos.todo}</td>

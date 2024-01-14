@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import "../App.css"
 import DisplayTable from './DisplayTable'
+import { useDispatch } from 'react-redux'
+import { create } from '../redux/toDoSlice'
 
 let globalId = 1
 const initialState = {
@@ -13,12 +15,9 @@ const initialState = {
 const InputForm = () => {
     const [formData, setFormData] = useState(initialState)
     const [toDo, setToDO] = useState([])
-    const handleOnDelete = (id) => {
-        if (window.confirm("Are you sure to delete this TODO?")) {
-            const value = toDo.filter((data) => data.id !== id)
-            setToDO(value)
-        }
-    }
+
+    const dispatch = useDispatch()
+   
 
     const handleOnchange = (e) => {
         const { name, value } = e.target
@@ -29,10 +28,16 @@ const InputForm = () => {
     const handleOnsubmit = (e) => {
         e.preventDefault()
         setToDO([...toDo, { todos: formData, id: globalId++ }])
+        
+        console.log(toDo)
         setFormData(initialState)
+        
 
     }
-
+   
+        dispatch(create(toDo))
+    
+    
    
 
     return (
@@ -53,7 +58,7 @@ const InputForm = () => {
             </Form>
             <span className="d-block p-1 bg-info "></span>
             <div className="display">
-                <DisplayTable toDo={toDo} handleOnDelete={handleOnDelete} />
+                <DisplayTable   />
             </div>
         </div>
 
