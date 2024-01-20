@@ -90,6 +90,10 @@ const Login = () => {
             <Button type='submit' variant='success'>SigIn</Button>
           </div>
 
+          <div className="text-end mt-2">
+            Forgot Password? <a href='/password-reset'>Reset</a> now
+          </div>
+
 
 
 

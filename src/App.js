@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import PrivateRoute from './components/PrivateRoute';
+import ForgetPassword from './pages/ForgetPassword';
 
 
 
@@ -17,6 +18,7 @@ function App() {
       <Routes>
       <Route path='/' element={<Login />} />
       <Route path='/register' element={<Registration />} />
+      <Route path='/password-reset' element={<ForgetPassword />} />
       
       <Route path='dashboard' element={
       <PrivateRoute>
