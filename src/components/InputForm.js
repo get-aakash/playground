@@ -2,8 +2,12 @@ import React, { useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import "../App.css"
 import DisplayTable from './DisplayTable'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { create } from '../redux/toDoSlice'
+import { getToDo, postToDO } from '../redux/todo/toDo'
+import { addDoc, collection } from 'firebase/firestore'
+import { db } from '../firebase/firebase-config'
+import { toast } from 'react-toastify'
 
 let globalId = 1
 const initialState = {
@@ -15,6 +19,7 @@ const initialState = {
 const InputForm = () => {
     const [formData, setFormData] = useState(initialState)
     const [toDo, setToDO] = useState([])
+    const {userInfo} = useSelector((state)=>state.user)
 
     const dispatch = useDispatch()
    
@@ -25,12 +30,22 @@ const InputForm = () => {
 
 
     }
-    const handleOnsubmit = (e) => {
+    const handleOnsubmit = async(e) => {
         e.preventDefault()
-        setToDO([...toDo, { todos: formData, id: globalId++ }])
         
-        console.log(toDo)
-        setFormData(initialState)
+        const obj = {...formData, userId: userInfo.uid, createdAt: Date.now()}
+        
+        console.log(obj)
+        const docRef = await addDoc(collection(db, "todos"), obj)
+
+        if(docRef?.id){
+            setFormData(initialState)
+            dispatch(getToDo(userInfo.uid))
+            toast.success("The todo has been created!!!")
+        }
+        
+       
+       
         
 
     }

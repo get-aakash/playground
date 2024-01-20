@@ -4,12 +4,16 @@ import { Button, Form } from 'react-bootstrap'
 import CustomInput from '../components/CustomInput'
 import { toast } from 'react-toastify'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
-import { auth } from '../firebase/firebase-config'
+import { auth, db } from '../firebase/firebase-config'
 import { useNavigate } from 'react-router-dom'
+import { doc, setDoc } from 'firebase/firestore'
+import { useDispatch } from 'react-redux'
+import { createUser } from '../redux/userSlice'
 
 const Registration = () => {
   const [formData, setFormData]= useState({})
   const [error, setError] = useState("")
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const inputs =[
     {
@@ -82,6 +86,17 @@ const Registration = () => {
         updateProfile(user,{
           displayName: formData.fName
         })
+        const userObj = {
+          fName: formData.fName,
+          lName: formData.lName,
+          email: formData.email
+
+        }
+        await setDoc(doc(db, "user", user.uid),userObj)
+        dispatch(createUser(
+          {...userObj,
+          uid:user.uid}
+        ))
         navigate("/dashboard")
       }
       
