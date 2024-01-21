@@ -18,7 +18,7 @@ export const getToDo =  (userId) => async(dispatch)=>{
         value.push(data)
     })
     dispatch(create(value))
-    console.log(value)
+    
    } catch (error) {
     
    }
