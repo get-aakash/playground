@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <Navbar className='navBar' expand="md" >
       <Container>
-        <Navbar.Brand href="#home">The Best ToDO App Ever!!!</Navbar.Brand>
+        <Navbar.Brand href="/dashboard">The Best ToDO App Ever!!!</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         {userInfo?.uid &&   <div>Welcome Back {userInfo.displayName}</div>}
       
