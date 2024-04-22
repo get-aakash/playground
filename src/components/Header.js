@@ -11,8 +11,8 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto gap-2">
             <Link to="/signup">SignUp</Link>
-            <Link to="/signin">SignUp</Link>
-            <Link to="/signout">SignUp</Link>
+            <Link to="/signin">SignIn</Link>
+            <Link to="/signout">SignOut</Link>
             
            
           </Nav>
