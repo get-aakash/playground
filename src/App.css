@@ -1,22 +1,3 @@
 .main{
-  min-height: 85vh;
-  background-color: #072d32;
-}
-.navBar{
-  background-color: #45858D;
-}
-
-.footer{
-  background-color: #45858D ;
-}
-
-.span1{
-  background-color: white
-}
-.container{
-  color: white;
-}
-.text-area{
-  
-  background: white;
+  min-height: 81vh;
 }

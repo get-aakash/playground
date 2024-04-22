@@ -1,15 +1,10 @@
 import React from 'react'
-import DefaultLayout from '../components/DefaultLayout'
-import InputForm from '../components/InputForm'
-
+import DefaultLayout from '../components/layout/DefaultLayout'
 
 const Dashboard = () => {
-
-
   return (
     <DefaultLayout>
-        <InputForm  />
-        
+        Dashboard
     </DefaultLayout>
   )
 }
