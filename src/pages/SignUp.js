@@ -3,23 +3,32 @@ import { Button, Col, Container, Form } from 'react-bootstrap'
 import DefaultLayout from '../components/layout/DefaultLayout'
 import CustomInput from '../components/CustomInput'
 import { toast } from 'react-toastify'
+import { createUserAction } from '../components/userAction'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setUser } from '../components/userSlice'
 
 const SignUp = () => {
-
     const [formData, setFormData] = useState({})
-
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const handleOnChange = (e)=>{
         const {name,value} = e.target
         setFormData({...formData, [name]: value})
     }
 
-    const handleOnSubmit = (e)=>{
+    const handleOnSubmit = async(e)=>{
         e.preventDefault()
         const {password, cPassword} = formData
 
         if(password===cPassword){
-            toast.success("User Created")
-            console.log("success")
+            const user =await  createUserAction(formData)
+        
+            if(user?.uid){
+                
+                navigate("/dashboard")
+                dispatch(setUser(user))
+            }
         }
     }
     const inputs = [
@@ -63,12 +72,12 @@ const SignUp = () => {
     ]
     return (
         <DefaultLayout>
-            <Container className='mt-3 p-3 w-25 m-auto border bg-white rounded '>
+            <div className='mt-4 border rounded m-auto w-25 d-grid p-4 bg-white'>
                 <h3>SignUp here !!!</h3>
                 <hr />
-                <div className="d-grid">
-                    <Form onSubmit={handleOnSubmit}>
-                    {inputs.map((item, i) => <CustomInput {...item} onChange={handleOnChange}/>)}
+                <div >
+                    <Form className="d-grid" onSubmit={handleOnSubmit}>
+                    {inputs.map((item, i) => <CustomInput  key={i} {...item} onChange={handleOnChange}/>)}
                     <Button type='submit' className='mt-3'>SignUp</Button>
 
                     </Form>
@@ -78,7 +87,7 @@ const SignUp = () => {
 
 
 
-            </Container>
+            </div>
 
 
         </DefaultLayout>
