@@ -10,10 +10,19 @@ import { setUser } from '../components/userSlice'
 
 const SignUp = () => {
     const [formData, setFormData] = useState({})
+    const [error, setError] = useState("")
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const handleOnChange = (e)=>{
         const {name,value} = e.target
+
+        if(name==="password"){
+            setError("")
+            value.length < 6 && setError("password must be 6 characters long")
+            !/[0-9]/.test(value)&& setError("Number is required")
+            !/[A-Z]/.test(value)&& setError("Upper Case is required")
+            !/[a-z]/.test(value)&& setError("Lower Case is required")
+        }
         setFormData({...formData, [name]: value})
     }
 
@@ -21,8 +30,10 @@ const SignUp = () => {
         e.preventDefault()
         const {password, cPassword} = formData
 
-        if(password===cPassword){
+        if(password!==cPassword){
             const user =await  createUserAction(formData)
+
+        
         
             if(user?.uid){
                 
@@ -78,6 +89,11 @@ const SignUp = () => {
                 <div >
                     <Form className="d-grid" onSubmit={handleOnSubmit}>
                     {inputs.map((item, i) => <CustomInput  key={i} {...item} onChange={handleOnChange}/>)}
+                    <Form.Text>
+                        Your Password must contain atleast 6 characters includng upper and lower case.
+                    </Form.Text>
+                    {error && <ul>
+                        <li className='text-danger fw-bolder mt-3'>{error}</li></ul>}
                     <Button type='submit' className='mt-3'>SignUp</Button>
 
                     </Form>
