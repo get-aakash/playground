@@ -3,21 +3,28 @@ import DefaultLayout from './layout/DefaultLayout'
 import { Button, Form, Placeholder } from 'react-bootstrap'
 import CustomInput from './CustomInput'
 import { toast } from 'react-toastify'
+import { sendPasswordResetEmail, updatePassword } from 'firebase/auth'
+import { auth, db } from './firebase-config/firebaseConfig'
+import { useNavigate } from 'react-router-dom'
 
 const ResetPassword = () => {
     const [formData, setFormData] = useState({})
-
+const navigate = useNavigate()
     const handleOnChange = (e)=>{
         const {name, value} = e.target
         setFormData ({...formData, [name]: value})
 
     }
-    const handleOnSubmit = (e)=>{
+    const handleOnSubmit = async(e)=>{
         e.preventDefault()
-        const {nPassword, cnPassword} = formData
-        if(nPassword !== cnPassword){
-            toast.error("Passwor Doesnot match")
-        }
+        sendPasswordResetEmail(auth,formData.email).then(data=>{
+            alert("password reset link has been send to your email!!!")
+            navigate("/signin")
+        }).catch(error=>{
+            alert(error.message)
+        })
+        
+        
     }
     const inputs = [{
         name: "email",
@@ -26,20 +33,7 @@ const ResetPassword = () => {
         required: true,
         Placeholder: "sam@sam.com"
     },
-    {
-        name: "nPassword",
-        label: "New Password",
-        type: "password",
-        required: true,
-        Placeholder: "******"
-    },
-    {
-        name: "cnPassword",
-        label: "Confirm Password",
-        type: "password",
-        required: true,
-        Placeholder: "******"
-    },
+  
 
 
 
@@ -51,7 +45,7 @@ const ResetPassword = () => {
                 <hr />
                 <Form onSubmit={handleOnSubmit}>
                 {inputs.map((item, i) => <CustomInput key={i} {...item} onChange={handleOnChange} /> )}
-                <div className="mt-3 d-grid"><Button type='submit'>Reset Password</Button></div>
+                <div className="mt-3 d-grid"><Button type='submit'>Send Password rest link</Button></div>
 
                 </Form>
                
