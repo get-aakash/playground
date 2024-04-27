@@ -9,7 +9,21 @@ import { ToastContainer } from 'react-toastify';
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import PrivateRoute from './components/privateRoute/PrivateRoute';
+import { useDispatch } from 'react-redux';
+import { onAuthStateChanged } from 'firebase/auth';
+import { setUser } from './components/userSlice';
+import { auth } from './components/firebase-config/firebaseConfig';
+import ResetPassword from './components/ResetPassword';
 function App() {
+  const dispatch = useDispatch()
+  onAuthStateChanged(auth,(user)=>{
+    const obj = {
+      uid: user?.uid,
+      email: user?.email,
+      displayName: user?.displayName
+    }
+    dispatch(setUser(obj))
+  })
 
   return (
     <div className="app">
@@ -26,6 +40,7 @@ function App() {
         
       } 
       />
+      <Route path='/reset-password' element={<ResetPassword />}/>
         
 
       </Routes>

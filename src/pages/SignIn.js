@@ -70,6 +70,7 @@ console.log(userInfo.uid)
             <hr />
             <Form onSubmit={handleOnSubmit}>
             {inputs.map((item,i)=><CustomInput key={i} {...item} onChange={handleOnChange} />)}
+            <p>Forgot Password? <a href='/reset-password' >Reset-Password</a> here</p>
             <Button type='submit' className='mt-3'>SignIn</Button>
 
             </Form>
