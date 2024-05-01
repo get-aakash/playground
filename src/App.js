@@ -14,6 +14,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { setUser } from './components/userSlice';
 import { auth } from './components/firebase-config/firebaseConfig';
 import ResetPassword from './components/ResetPassword';
+import NewBook from './pages/NewBook';
 function App() {
   const dispatch = useDispatch()
   onAuthStateChanged(auth,(user)=>{
@@ -31,6 +32,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/signin' element={<SignIn />} />
+        <Route path='/newbook' element={<NewBook />} />
         <Route 
         path='dashboard' 
         element = {
