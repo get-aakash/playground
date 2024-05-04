@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import DefaultLayout from '../components/layout/DefaultLayout'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import BookList from '../components/books/BookList'
 import { Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { getBookAction } from '../components/books/bookAction'
 
 const Dashboard = () => {
+  const dispatch = useDispatch()
+  
+  useEffect(()=>{
+    dispatch(getBookAction())
+  },[dispatch])
   return (
     <DefaultLayout>
       <div className="mt-4 m-auto w-25 ">
